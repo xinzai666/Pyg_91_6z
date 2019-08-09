@@ -8,6 +8,10 @@
     <artifactId>pyg_parent</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+<<<<<<< HEAD
+         
+=======
+>>>>>>> master
     <modules>
         <module>pyg_common_91</module>
         <module>pyg_pojo_91</module>
@@ -32,8 +36,11 @@
         <module>pyg_seckill_task</module>
     </modules>
 
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> master
     <!-- 集中定义依赖版本号 -->
     <properties>
         <junit.version>4.12</junit.version>

@@ -238,6 +238,17 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  <select id="goodsNumSelect" resultType="map">
+    SELECT ic.name AS name,COUNT(*) AS value  FROM tb_goods tg,tb_item_cat ic WHERE tg.category3_id=ic.id GROUP BY category3_id
+  </select>
+    <select id="itemSaleroomSelect" resultType="map">
+        SELECT ic.name AS name, IFNULL(SUM(io.total_fee),0) AS value FROM tb_goods tg
+        LEFT JOIN tb_item_cat ic ON tg.category1_id =  ic.id
+        LEFT JOIN tb_item ti ON tg.id=ti.goods_id
+        LEFT JOIN tb_order_item io ON ti.id=io.item_id
+        LEFT JOIN tb_order tr ON tr.order_id=io.order_id
+        WHERE ic.parent_id=0 GROUP BY ic.id
+    </select>
   <update id="updateByExampleSelective" parameterType="map">
     update tb_goods
     <set>

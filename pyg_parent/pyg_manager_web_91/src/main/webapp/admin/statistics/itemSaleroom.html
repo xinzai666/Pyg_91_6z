@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>商品分类统计</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+
+
+    <script src="../../plugins/echarts/echarts.js"></script>
+    <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <!--<script src="../../plugins/angularjs/angular.min.js"></script>-->
+    <!--<script src="../../js/base.js"></script>-->
+    <!--<script src="../../js/service/statisticsService.js"></script>-->
+    <!--<script src="../../js/controller/statisticsController.js"></script>-->
+
+</head>
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width: 1000px;height:550px;"></div>
+
+<script type="text/javascript">
+    //发送ajax,get请求获取参数
+    $(document).ready(function(){
+        $.get("../../statistics/itemSaleroomSelect",function (numberList) {
+            var nameArr=[];
+            var valueArr=[];
+            for(var i=0;i<numberList.length;i++){
+                nameArr[i]=numberList[i].name;
+                valueArr[i]=numberList[i].value;
+            }
+
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main'));
+
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: '进一月销售排行'
+                },
+                tooltip: {},
+                legend: {
+                    data:['销量']
+                },
+                xAxis: {
+                    data: nameArr
+                },
+                yAxis: {},
+                series: [{
+                    name: '销量',
+                    type: 'bar',
+                    data: valueArr
+                }]
+            };
+
+
+
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        })
+    });
+
+
+</script>
+
+
+
+</body>
+</html>
